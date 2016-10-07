@@ -1,0 +1,7 @@
+0 4 1 * * php /var/www/acuma.in/console facebook:locationImport oradea >> /tmp/facebookLocationImport.log 2>&1
+0 3 * * * php /var/www/acuma.in/console facebook:eventImport oradea >> /tmp/facebookEventImport.log 2>&1
+0 * * * * php /var/www/acuma.in/console facebook:photoImport oradea >> /tmp/facebookPhotoImport.log 2>&1
+*/5 * * * * php /var/www/acuma.in/console instagram:mediaPostsImport oradea >> /tmp/instagramPostsImport.log 2>&1
+*/5 * * * * php /var/www/acuma.in/console twitter:postsImport oradea >> /tmp/twitterPostsImport.log 2>&1
+*/5 * * * * php /var/www/acuma.in/console twitter:postsImport oradea oradea -t >> /tmp/twitterTweetsImport.log 2>&1
+0 0 1 * * php /var/www/acuma.in/console oradea:eventImport >> /tmp/oradeaEventImport.log 2>&1

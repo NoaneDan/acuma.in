@@ -1,0 +1,15 @@
+{% extends "moderation_table_base.html"%}
+
+{% block header %}Accepted Users{% endblock %}
+{% block tableContent %}
+	{% for user in users %}
+		<tr>
+			<td>{{ user['username'] }}</td>
+			<td>{{ user['platform'] }}</td>
+			<td>{{ user['state'] }}</td>
+			<td>
+				<button class="action-button" type="button" name="/moderation/blacklisted" value={{ user['id'] }}>Blacklist</button>
+			</td>
+		</tr>
+	{% endfor %}
+{% endblock %}

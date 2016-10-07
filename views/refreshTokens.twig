@@ -1,0 +1,31 @@
+{% block content %}
+
+    <div id="menu-content"> 
+        <h1 class="title">Refresh the Access Tokens</h1>
+        <p>The generated accesss tokens will be added to the database.</p>
+        <div class="tokens">
+            <ul>
+                <li>
+                    <form action="/backend/refreshTokens" method="POST">
+                        <button type="submit" name="platform" value="Facebook">Facebook</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/backend/refreshTokens" method="POST">
+                       <button type="submit" name="platform" value="Instagram">Instagram</button>
+                    </form>
+                </li>
+                <li>
+                    <form action="/backend/refreshTokens" method="POST">
+                        <button type="submit" name="platform" value="Twitter">Twitter</button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    {% if err %}
+        <p> Failed to generate the access token. </p>
+        <p> Command output: {{ output }} </p>
+    {% endif %}
+{% endblock %}

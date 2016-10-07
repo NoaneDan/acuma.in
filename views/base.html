@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+	
+	<head>
+	<meta charset="utf-8">
+
+	<!-- Mobile Specific Metas
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="icon" type="image/png" sizes="16x16" href="http://e-spres-oh.com/favicon-16x16.png">
+	
+	<!-- FONT
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link href="https://fonts.googleapis.com/css?family=Hind:400,500,700|Montserrat:400,700|Open+Sans:400,700" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" href="/assets/styles/font-awesome-4.6.3/css/font-awesome.min.css">
+
+	<!-- CSS
+	–––––––––––––––––––––––––––––––––––––––––––––––––– -->
+	<link rel="stylesheet" type="text/css" href="/assets/styles/admin-style.css">
+	<link rel="stylesheet" type="text/css" href="/assets/styles/normalize.css">
+	<link rel="stylesheet" type="text/css" href="/assets/styles/skeleton.css">
+	
+	<title>{% block title %}{% endblock %}</title>
+	</head>
+
+	<body>
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+	<!-- jQuery library -->
+	<script type="text/javascript" src="/assets/js/jquery-1.8.3.min.js"></script>
+	<script type="text/javascript" src="/assets/js/notify.min.js"></script>
+	<script type="text/javascript" src="/assets/js/admin-script.js"></script> 
+
+	</body>
+</html>

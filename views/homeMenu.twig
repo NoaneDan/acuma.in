@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}Home Menu{% endblock %}
+
+{%block content %}
+    {% for city in cities %}
+        <a href="/{{ city['city'] }}">{{ city['city'] }}</a>
+    {% endfor %}
+    
+    <script type="text/javascript" src="/assets/js/geoLocateUser.js"></script>
+{% endblock %}

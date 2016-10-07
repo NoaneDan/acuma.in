@@ -1,0 +1,21 @@
+{% block content %}
+    <script>
+		$(document).ready(function(){
+			$(".fa-plus-circle").click(function(){
+				$(".def-form").show();
+			});
+		});
+	</script>
+    
+    <h1 class="head-title">Welcome, {{ user }}!</h1>
+	<h2 class="sub-title">Locations</h2>
+	<p>Here you can manage the locations from which to import data.</p>
+	<h2 class="sub-title">Moderation</h2>
+	<p>From here you can control what data is displayed on the site.</p>
+	<h2 class="sub-title">Users</h2>
+	<p>Manage the administrators of the site.</p>
+	<h2 class="sub-title">Contact</h2>
+	<p>Here all the messages received from the visitors of the site.</p>
+	<h2 class="sub-title">Refresh access tokens</h2>
+	<p>Regenerate the access tokens for each platform.</p>
+{% endblock %}

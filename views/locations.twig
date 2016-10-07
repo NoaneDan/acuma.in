@@ -1,0 +1,57 @@
+{% block content %}
+	<script>
+		$(document).ready(function(){
+			$(".fa-plus-circle").click(function(){
+				$(".def-form").show();
+			});
+		});
+	</script>
+<div id="menu-content">
+	<div title="Add new location">
+		<button type="submit" class="fa fa-plus-circle" value="Add"></button>
+	</div>
+	<div>
+		<fieldset class="def-form">
+			<input class="def-form" id="city" type="text" placeholder="City"/>
+			<input class="def-form" id="latitude" type="text" placeholder="Latitude"/>
+			<input class="def-form" id="longitude" type="text" placeholder="Longitude"/>
+			<input class="def-form" id="radius" type="text" placeholder="Radius in meters"/>
+			<input class="def-btn" id="location-submit" type="submit" name="Submit"/>
+		</fieldset>
+	</div>
+	<div>
+		<table>
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>City</th>
+					<th>Latitudine</th>
+					<th>Longitudine</th>
+					<th>Radius</th>
+					<th><i class="fa fa-cog"></i></th>
+				</tr>
+			</thead>
+
+			{% for location in locations %}
+				<tbody>
+					<tr>
+						<td>{{ location['id'] }}</td>
+						<td>{{ location['city'] }}</td>
+						<td>{{ location['latitude'] }}</td>
+						<td>{{ location['longitude'] }}</td>
+						<td>{{ location['radiusInMeters'] }}</td>
+						<td>
+							<button type="button" class="fa fa-trash action-button" name="/locations/delete" value="{{ location['id'] }}"></button>
+							<button type="buttom" class="fa fa-pencil" name="" value=""></button>
+						</td>
+					</tr>
+				</tbody>
+			{% endfor %}
+		</table>
+			{% if err %}
+				<p>City duplicate.</p>
+			{% endif %}
+		<br>
+	</div>
+</div>
+{% endblock %}

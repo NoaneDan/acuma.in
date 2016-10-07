@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Menu{% endblock %}
+
+{% block content %}
+
+<div class="navigation">
+	<h1 class="logo"><a href="/backend"><span style="color:#cc0000">acuma.in / </span>oradea</a></h1>
+	<nav class="side-nav">
+		<ul>
+			<li class="label">Dashboard</li>
+			<li class="menu"><a href="/backend/locations"><i class="icon fa fa-map-marker"></i>&nbsp; Locations</a></li>
+			<li class="menu parent"><span class="roller"><i class="icon fa fa-gear"></i>&nbsp; Moderation</span>
+				<ul class="sub-menu">
+					{% for city in cities %}
+						<li class="parent"><span class="roller">{{ city['city'] }}</span>
+							<ul class="sub-menu">
+								<li><a href="/backend/moderation/accepted/{{ city['id'] }}">Accepted</a></li>
+								<li><a href="/backend/moderation/pending/{{ city['id'] }}">Pending</a></li>
+								<li><a href="/backend/moderation/blacklisted/{{ city['id'] }}">Blacklisted</a></li>
+								<li><a href="/backend/reportedPosts/{{ city['id'] }}">Reported Posts</a></li>
+								<li><a href="/backend/facebookLocations/{{ city['id'] }}">Facebook Locations</a></li>
+							</ul>
+						</li>
+					{% endfor %}
+				</ul>
+			</li>
+			<li class="menu"><a href="/backend/users"><i class="icon fa fa-user"></i>&nbsp; Users</a></li>
+			<li class="menu"><a href="/backend/contact"><i class="icon fa fa-envelope"></i>&nbsp; Contact</a></li>
+			<li class="menu"><a href="/backend/refreshTokens"><i class="icon fa fa-pencil-square-o"></i>&nbsp; Refresh Access Tokens</a></li>
+			<li class="menu"><a id="logout" href="/backend/logout"><i class="icon fa fa-lock"></i>&nbsp; Log out</a></li>
+		</ul>
+	</nav>
+</div>
+<div id="page-content" class="landing">
+	
+</div>
+{% endblock %}

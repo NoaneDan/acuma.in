@@ -1,0 +1,49 @@
+{% extends "front-base.html" %}
+{% block title %}contact{% endblock %}
+{% block content %}
+    <header>
+        <div class="container">
+            <h1 class="logo"><a href="/home"><span style="color:#cc0000">acuma.in /</span> oradea</a></h1>
+            <nav class="desktop-only">
+                <ul>
+                    <li><a href="/about">Despre noi</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul> 
+            </nav>
+            <nav class="mobile-only">
+                <div class="nav-mobile"><a id="nav-toggle" href="#"><span></span></a></div>
+                            </nav>
+        </div> <!-- end of header container -->
+        <ul class="mobile-only">
+            <li><a href="/about">Despre noi</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul> 
+    </header>
+    <div class="content-holder">
+        <div class="container">
+            <h1 class="title">Contact us</h1>
+            <br>
+            <p>If there are any questions, you can contact us using the information below:</p>
+            <div id="contact">
+                <form id="Contact" action="">
+                    <fieldset>
+                        <input id="name" placeholder="Your name" type="text" minlength="2" maxlength="100" required> <br>
+                        <input id="email" placeholder="Your email" type="email" minlength="6" maxlength="200" required email> <br>
+                        <input id="subject" placeholder="Subject" type="text" minlength="2" maxlength="200" required> <br>
+                        <textarea id="message" placeholder="Message" rows="5" cols="80" minlength="2" maxlength="10000" required></textarea> <br>
+                        <button id="submit" type="submit">Submit</button>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <footer class="foo-bottom">
+    <div class="container">
+        <p>© 2016 acuma.în / oradea <a href="/privacy"> | Privacy Policy</a></p>
+        <p>Powered by:</p>      
+        <div>
+            <a href="http://e-spres-oh.com/" target="_blank"><img src="/assets/images/logo-espresoh.png" class="esp-logo"></a>
+        </div>
+    </div>
+</footer>
+{% endblock %}

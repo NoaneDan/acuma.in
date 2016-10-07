@@ -1,0 +1,44 @@
+#!/usr/bin/env php
+<?php
+/**
+ * Copyright 2016 [e-spres-oh]
+ * This file is part of Acuma.in
+ *
+ * Acuma.in is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Acuma.in is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Acuma.in.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+// application.php
+
+require_once __DIR__."/config.php";
+
+use Symfony\Component\Console\Application;
+
+$application = new Application();
+
+// ... register commands
+$application->add(new AcumaIn\Console\ImportTwitterPostsCommand());
+$application->add(new AcumaIn\Console\AuthTwitterCommand());
+$application->add(new AcumaIn\Console\ImportInstagramLocationsCommand());
+$application->add(new AcumaIn\Console\ImportInstagramMediaCommand());
+$application->add(new AcumaIn\Console\ImportInstagramLocationFromFacebookCommand());
+$application->add(new AcumaIn\Console\AuthFacebookCommand());
+$application->add(new AcumaIn\Console\ImportFacebookLocationsCommand());
+$application->add(new AcumaIn\Console\ImportFacebookEventsCommand());
+$application->add(new AcumaIn\Console\ImportFacebookPhotoCommand());
+$application->add(new AcumaIn\Console\TimelineMigrationCommand());
+$application->add(new AcumaIn\Console\SlugifyCommand());
+$application->add(new AcumaIn\Console\ImportInstagramMediaPostsCommand());
+$application->add(new AcumaIn\Console\UserCreateCommand());
+
+$application->run();

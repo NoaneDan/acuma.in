@@ -1,0 +1,44 @@
+{% block content %}
+	<script>
+		$(document).ready(function(){
+			$(".fa-plus-circle").click(function(){
+				$(".def-form").show();
+			});
+		});
+	</script>
+<div id="menu-content">
+	<div title="Add new user">
+		<button type="submit" class="fa fa-plus-circle" value="Add"></button>
+	</div>
+	<div>
+		<fieldset class="def-form">
+			<input class="def-form" type="text" id="username" placeholder="Username" />
+			<input class="def-pass" type="password" id="password" placeholder="Password" />
+			<input class="def-btn" id="user-submit" type="submit" name="Submit" />
+		</fieldset> 
+	</div>
+    <div>
+        <table class="sm-table">
+            <thead> 
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th><i class="fa fa-cog"></i></th>
+              </tr>
+            </thead>
+            
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>
+							<button type="button" class="fa fa-trash action-button" name="/users/delete" value="{{ user.id }}"></button>
+							<button type="button" class="fa fa-pencil" name="" value=""></button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                
+        </table>
+    </div> 
+</div>
+{% endblock %} 

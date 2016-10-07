@@ -1,0 +1,23 @@
+{% for event in events %}
+    <div class="box lg-box" id="{{ event.id }}">
+        <div class="slick-gallery">
+            {% for photo in event.photos %}
+                <div class="item" style="background-image:url('{{ photo }}')">
+                    <img src="/assets/images/1x1.gif" data-image="{{ photo }}" data-caption="{{ event.name }}">
+                </div>
+            {% else %}
+                <div class="item" style="background-image:url('/assets/images/no-image.jpg')">
+                    <img src="/assets/images/1x1.gif" data-image="/assets/images/no-image.jpg" data-caption="{{ event.name }}">
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            <div class="pagingInfo"></div>
+        </div>
+        <div class="lg-title">
+            <h2><a href="{{ event.facebook_url }}" target="_blank">{{ event.name }}</a></h2>
+            <i class="icon icon-link" title="Copy link to clipboard" data-clipboard-text="{{ host }}/{{ city }}/{{ event.id }}">&#xe803;</i>
+            <p><i class="icon-calendar-empty">&#xf133;</i>{{ event.start_date }}&nbsp;&nbsp;<i class="icon-clock">&#xe801;</i>{{ event.start_time }}<br> <i class="icon-location">&#xe802;</i>{{ event.location }} &nbsp;&nbsp; Attending: {{ event.attending_count }} Interested: {{ event.interested_count }} Maybe: {{ event.maybe_count }} </p>
+        </div>
+    </div>
+{% endfor %}

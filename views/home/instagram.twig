@@ -1,0 +1,11 @@
+{% set post = group[0] %}
+<div class="box sm-box" id="{{ post.id }}" style="background-image:url('{{ post.media_url }}');>
+    <img src="/assets/images/1x1.gif" data-image="{{ post.media_url }}" data-caption="{{ post.text }}">
+    <div title ="Report inappropriate content" class="report" id="{{ post.report_id }}"><i class="flag icon-flag">&#xe800;</i></div>
+    <div class="sm-title">
+        <h2><a href="{{ post.instagram_url }}" target="_blank">@{{ post.username }}</a></h2>
+        <a href="{{ post.instagram_url }}" target="_blank"><i class="icon icon-instagram">&#xf16d;</i>
+        </a>
+        <p>{{ post.text }}</p>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+{% extends "front-base.html" %}
+{% block title %}about us{% endblock %}
+{% block content %}
+	<header>
+		<div class="container">
+			<h1 class="logo"><a href="/home"><span style="color:#cc0000">acuma.in /</span> oradea</a></h1>
+			<nav class="desktop-only">
+				<ul>
+					<li><a href="/about">Despre noi</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul> 
+			</nav>
+			<nav class="mobile-only">
+				<div class="nav-mobile"><a id="nav-toggle" href="#"><span></span></a></div>
+							</nav>
+		</div> <!-- end of header container -->
+		<ul class="mobile-only">
+			<li><a href="/about">Despre noi</a></li>
+			<li><a href="/contact">Contact</a></li>
+		</ul> 
+	</header>
+	<div class="content-holder">
+		<div class="container">
+			<h1 class="title">About us</h1>
+			<br>
+			<p class="about-text"><strong>Acuma.in </strong> is an app that combines in real time the users’ location and user generated content on social media for events and places to visit nearby. Its purpose is to keep relevant data on its homepage, showcase images and or videos whenever the question ‘what should we do?’ comes up.</p>
+			<br>
+			<div class="line"></div>
+			<br>
+			<h1 class="title">Despre noi</h1>
+			<br>
+			<p class="about-text"><strong>Acuma.in </strong> este o aplicatie care alatura in timp real datele geografice ale utilizatorilor si informatii de pe retelele de socializare, legate de evenimente si locuri de vizitat in zona utilizatorului. Scopul aplicatiei este de a afisa informatii relevante pe pagina de start, a expune imagini sau videouri care raspund la intrebarea “Ce am putea sa facem acum?"
+			<br>Aplicatia a fost creata in cadrul internshipului de vara [e-spres-oh] de catre Krisztina Elekes si Noane Dan, coordonati de membrii echipei [e-spres-oh].</p>
+    	</div>
+    </div>
+    <footer class="foo-bottom">
+	<div class="container">
+		<p>© 2016 acuma.în / oradea <a href="/privacy"> | Privacy Policy</a></p>
+		<p>Powered by:</p>		
+		<div>
+			<a href="http://e-spres-oh.com/" target="_blank"><img src="/assets/images/logo-espresoh.png" class="esp-logo"></a>
+		</div>
+	</div>
+</footer>
+{% endblock %}

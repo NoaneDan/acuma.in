@@ -1,0 +1,34 @@
+{% block content %}
+
+    <div id="menu-content">
+
+            <h1 class="title">Facebook Locations</h1>
+            <table>
+                <tr>
+                    <th>Name</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>City</th>
+                    <th>Actions</th>
+                </tr>
+                
+                {% for location in locations %}
+                    <tr>
+                        <td>{{ location['name'] }}</td>
+                        <td>{{ location['latitude'] }}</td>
+                        <td>{{ location['longitude'] }}</td>
+                        <td>{{ location['city'] }}</td>
+                        <td>
+                            {% if location['blocked'] == 'yes' %}
+                                {% set actionName = 'unblock' %}
+                            {% else %}
+                                {% set actionName = 'block' %}
+                            {% endif %}
+                            
+                            <button class="action-button" type="button" name="/facebookLocations/{{ actionName }}" value="{{ location['id'] }}">{{ actionName }}</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+{% endblock %}

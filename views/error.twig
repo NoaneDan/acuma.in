@@ -1,0 +1,45 @@
+{% htmlcompress %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{ code == 404 ? 'Page not found' : 'Something went wrong' }}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+        <!--fonts-->
+        <link rel="stylesheet" type="text/css" href="{{ 'style.css,googlefonts.css' | minimize_css }}">
+    </head>
+    
+    <body>
+        <header>
+            <div class="container">
+                <h1 class="logo"><a href="#"><span style="color:#cc0000">acuma.in /</span> oradea</a></h1>
+                <nav>
+                    <ul>
+                        <li><a href="/about">Despre noi</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul> 
+                </nav>
+            </div> <!-- end of header container -->
+        </header>
+        
+        <div id="content">
+            <h1>{{ message }}</h1>
+        
+            <form>
+                <button class="more" type="submit" formaction="{{ host }}" formmethod="GET">Home</button>
+            </form>
+        </div>
+        
+        <footer>
+            <div class="container">
+                <p>© 2016 acuma.în / oradea <a href="/privacy"> | Privacy Policy</a></p>
+                <p>Powered by:</p>
+                <div>
+                    <a href="http://e-spres-oh.com/" target="_blank"><img src="/assets/images/logo-espresoh.png" class="esp-logo"></a>
+                </div>
+            </div>
+        </footer>
+    </body>
+</html>
+{% endhtmlcompress %}

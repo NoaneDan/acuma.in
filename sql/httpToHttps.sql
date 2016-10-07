@@ -1,0 +1,10 @@
+update twitter_post set image_url = replace(image_url, 'http:', 'https:') where image_url like 'http:%';
+update twitter_post set twitter_url = replace(twitter_url, 'http:', 'https:') where twitter_url like 'http:%';
+update twitter_tweet set twitter_url = replace(twitter_url, 'http:', 'https:') where twitter_url like 'http:%';
+update twitter_user set profile_img = replace(profile_img, 'http:', 'https:') where profile_img like 'http:%';
+update ig_post set media_url = replace(media_url, 'http:', 'https:') where media_url like 'http:%';
+update ig_post set instagram_url = replace(instagram_url, 'http:', 'https:') where instagram_url like 'http:%';
+update ig_user set profile_picture = replace(profile_picture, 'http:', 'https:') where profile_picture like 'http:%';
+update fb_event set facebook_url = replace(facebook_url, 'http:', 'https:') where facebook_url like 'http:%';
+update fb_event set ticket_uri = replace(ticket_uri, 'http:', 'https:') where ticket_uri like 'http:%';
+update fb_photo set photo_url = replace(photo_url, 'http:', 'https:') where photo_url like 'http:%';

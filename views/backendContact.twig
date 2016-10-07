@@ -1,0 +1,28 @@
+
+
+<div id="menu-content">
+
+   <h1 class="title">Contact</h1>
+   <table>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Subject</th>
+            <th>Message</th>
+            <th><i class="fa fa-cog"></i></th>
+            
+            {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact['name']|escape }}</td>
+                    <td>{{ contact['email']|escape }}</td>
+                    <td>{{ contact['subject']|escape }}</td>
+                    <td>{{ contact['message']|escape }}</td>
+                    <td>
+                        <button type="button" class="fa fa-trash action-button" name="/contact/delete" value="{{ contact['id'] }}"></button>
+                     </td>
+                </tr>
+            {% endfor %}
+        </tr>
+   </table>
+   
+</div>

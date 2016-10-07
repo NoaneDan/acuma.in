@@ -1,0 +1,6 @@
+0 4 1 * * php /vagrant/console facebook:locationImport oradea >> /tmp/facebookLocationImport.log 2>&1
+0 3 * * * php /vagrant/console facebook:eventImport oradea >> /tmp/facebookEventImport.log 2>&1
+0 * * * * php /vagrant/console facebook:photoImport oradea >> /tmp/facebookPhotoImport.log 2>&1
+*/5 * * * * php /vagrant/console instagram:mediaPostsImport oradea >> /tmp/instagramPostsImport.log 2>&1
+*/5 * * * * php /vagrant/console twitter:postsImport oradea >> /tmp/twitterPostsImport.log 2>&1
+*/5 * * * * php /vagrant/console twitter:postsImport oradea oradea -t >> /tmp/twitterTweetsImport.log 2>&1

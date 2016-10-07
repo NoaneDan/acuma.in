@@ -1,0 +1,39 @@
+
+{% block content %}
+
+    <div id="menu-content">
+
+            <h1 class="title">Reported Posts</h1>
+            <table>
+                <tr>
+                    <th>Username</th>
+                    <th>Source</th>
+                    <th>Post</th>
+                    <th>Actions</th>
+                </tr>
+                
+                {% for report in reports %}
+                    <tr>
+                        <td>{{ report['username'] }}</td>
+                        <td>
+                                {% if report['source'] == 'ig_post' %}
+                                        instagram
+                                {% else %}
+                                        twitter
+                                {% endif %}
+                        </td>
+                        <td>
+                                {% set ifFrameLink = report['source'] == 'ig_post' ? '' : 'https://twitframe.com/show?' %}
+                                <div class="hover-holder">
+                                        <a class="admin-hover" href={{ ifFrameLink }}{{ report['post'] }}>Reported Post</a><div class="box"><iframe data-src="{{ ifFrameLink }}{{ report['post'] }}" width = "500px" height = "500px"></iframe></div>
+                                </div>
+                        </td>
+                        <td>
+                                <button class="action-button" type="button" name="/report/approve" value="{{ report['id'] }}" >Approve</button>
+                                <button class="action-button" type="button" name="/report/block" value="{{ report['id'] }}" >Block</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,15 @@
+<div class="tweet-content">
+    <div title="Report inappropriate content" class="report" id="{{ tweet.report_id }}"><i class="flag icon-flag">&#xe800;</i></div>
+    <div class="tweet-header">
+        <div class="tweet-avatar"><img src="{{ tweet.profile_img }}"></div>
+        <h2><a href="{{ tweet.url }}" target="_blank">{{ tweet.name ?? tweet.username }}</a></h2>
+        <h3><a href="{{ tweet.url }}" target="_blank">@{{ tweet.username }}</a></h3>
+    </div>
+    <div class="tweet-body">
+        <p class="tweet-text">{{ tweet.text }}</p>
+    </div>
+    <div class="tweet-footer">
+        <p class="tweet-date">{{ tweet.created_at }}</p>
+        <a href="{{ tweet.url }}" target="_blank"> <i class="blue icon-twitter">&#xf099;</i></a>
+    </div>
+</div>

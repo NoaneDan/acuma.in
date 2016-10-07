@@ -1,0 +1,12 @@
+{% for key, post in data.posts %}
+    {% set source = key|split("-")[0] %}
+    {% if source == "twitter_post" %}
+    {% elseif source == "twitter_tweet" %}
+        {{ include('home/twitter.twig', {group: post}) }}
+    {% elseif source == "ig_post" %}
+        {{ include('home/instagram.twig', {group: post}) }}
+    {% elseif source == "fb_event" %}
+        {{ include('home/facebook.twig', {events: post}) }}
+    {% endif %}
+{% endfor %}
+<script type="text/javascript">window.max_id = {{ data.max_id }};</script>

@@ -1,0 +1,42 @@
+{% extends "moderation_table_base.html"%}
+
+{% block title %}Blacklisted Users{% endblock %}
+{% block header %}Blacklisted Users{% endblock %}
+{% block tableContent %}
+	{% for user in users %}
+		<tr>
+			<td>{{ user['username'] }}</td>
+			<td>{{ user['platform'] }}</td>
+			<td>{{ user['state'] }}</td>
+
+			<td><table>
+			{% set media = user['platform'] == 'twitter' ? 'twitter_url' : 'instagram_url' %}
+			{% set ifFrameLink = user['platform'] == 'twitter' ? 'https://twitframe.com/show?' : '' %}
+			{% set counter = 1 %}
+			{% for post in posts[user['id']] %}
+				<tr>
+                    <div class="hover-holder">
+                        <a class="admin-hover" href={{ ifFrameLink }}{{ post[media] }}>Post {{ counter }}</a><div class="box"><iframe data-src="{{ ifFrameLink }}{{ post[media] }}" width = "500px" height = "500px"></iframe></div> <br />
+                    </div>
+                </tr>
+				{% set counter = counter + 1 %}
+			{% endfor %}
+
+			{% if user['platform'] == 'twitter' %}
+			{% set counter = 1 %}
+			{% for tweet in tweets[user['id']] %}
+					<tr>
+                        <div class="hover-holder">
+                            <a class="admin-hover" href="{{ ifFrameLink }}{{ tweet['twitter_url'] }}">Tweet {{ counter }}</a><div class="box"><iframe data-src="{{ ifFrameLink }}{{ tweet['twitter_url'] }}" width = "500px" height = "500px"></iframe></div> <br />
+                        </div>
+                    </tr>
+				{% set counter = counter + 1 %}
+			{% endfor %}
+			{% endif %}
+			</table></td>
+			<td>
+				<button class="action-button" type="button" name="/moderation/accepted" value={{ user['id'] }}>Accept</button>
+			</td>
+		</tr>
+	{% endfor %}
+{% endblock %}

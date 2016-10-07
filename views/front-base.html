@@ -1,0 +1,63 @@
+{% htmlcompress %}
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+	<meta charset="utf-8">
+	<title>acuma.in</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16x16.png">
+		<!--fonts-->
+	<link rel="stylesheet" type="text/css" href="{{ 'style.css,googlefonts.css' | minimize_css }}">
+	<style type="text/css">
+	.slick-prev, .slick-next {
+    font-size: 0;
+    line-height: 0;
+    text-shadow: 1px 1px 1px #2a2a2a;
+    position: absolute;
+    top: 18px;
+    display: block;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    -webkit-transform: translate(0, -50%);
+    -ms-transform: translate(0, -50%);
+    transform: translate(0, -50%);
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+	</style>
+	<title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+	<div id="content">
+		{% block content %}
+		{% endblock %}
+	</div>
+
+	<noscript id="deferred-styles">
+	<link rel="stylesheet" type="text/css" href="{{ 'slick.css,slick-theme.css,slick-lightbox.css' | minimize_css }}">
+</noscript>
+<script>
+	var loadDeferredStyles = function() {
+		var addStylesNode = document.getElementById("deferred-styles");
+		var replacement = document.createElement("div");
+		replacement.innerHTML = addStylesNode.textContent;
+		document.body.appendChild(replacement);
+		addStylesNode.parentElement.removeChild(addStylesNode);
+	};
+	var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+		webkitRequestAnimationFrame || msRequestAnimationFrame;
+	if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+	else window.addEventListener('load', loadDeferredStyles);
+</script>
+
+
+	<script type="text/javascript" src="{{ 'jquery-1.8.3.min.js,slick-lightbox.min.js,underscore-min.js,loadmore.js,script.js,notify.min.js,clipboard.min.js,clipboard.init.js,jquery.validate.min.js,contact.js' | minimize_js }}"></script>
+	<script type="text/javascript">
+	</script>
+</body>
+</html>
+{% endhtmlcompress %}

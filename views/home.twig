@@ -1,0 +1,54 @@
+{% extends "front-base.html" %}
+{% block title %}acuma.in{% endblock %}
+{% block content %}
+	<header>
+		<div class="container">
+			<h1 class="logo"><a href="/home"><span style="color:#cc0000">acuma.in /</span> oradea</a></h1>
+			<nav class="desktop-only">
+				<ul>
+					<li><a href="/about">Despre noi</a></li>
+					<li><a href="/contact">Contact</a></li>
+				</ul> 
+			</nav>
+			<nav class="mobile-only">
+				<div class="nav-mobile"><a id="nav-toggle" href="#"><span></span></a></div>
+							</nav>
+		</div> <!-- end of header container -->
+		<ul class="mobile-only">
+			<li><a href="/about">Despre noi</a></li>
+			<li><a href="/contact">Contact</a></li>
+		</ul> 
+	</header>
+	<div class="content-holder">
+		<div class="container">
+			<div class="grid">
+				<div class="gutter-sizer">
+				</div>
+				{% include 'home/first_load.twig' %}
+			</div> <!-- end of grid -->
+		</div> <!-- end of container -->
+		{% if hash is defined %}
+			<div>
+				<form>
+					<button class="more" type="submit" formaction="{{ host }}/{{ city }}" formmethod="GET">See more</button>
+				</form>
+			</div>
+		{% else %}
+			<div>
+				<button class="more" type="button" onclick="loadMore();">See more</button>
+			</div>
+		{% endif %}
+		<div class="loading">
+			<img src="/assets/images/ajax-loader.gif" class="loading">
+		</div>
+	</div> <!-- end of content-holder -->
+<footer>
+	<div class="container">
+		<p>© 2016 acuma.în / oradea <a href="/privacy"> | Privacy Policy</a></p>
+		<p>Powered by:</p>
+		<div>
+			<a href="http://e-spres-oh.com/" target="_blank"><img src="/assets/images/logo-espresoh.png" class="esp-logo"></a>
+		</div>
+	</div>
+</footer>
+{% endblock %}

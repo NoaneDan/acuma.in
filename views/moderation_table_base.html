@@ -1,0 +1,27 @@
+{% block content %}
+
+	<div id="menu-content"> 
+		<h1 class="title">{% block header%}{% endblock %}</h1>
+		<table>
+			<tr>
+				<th>Username</th>
+				<th>Platform</th>
+				<th>State</th>
+				{% if state != "accepted" %}
+				<th>Last Posts</th>
+				{% endif %}
+				<th>Actions</th>
+			</tr>
+
+		{% block tableContent %}
+		{% endblock %}
+		</table>
+		
+		{% if page > 0 %}
+			<button class="nav-button" type="button" name="/{{ state }}/1" value="{{ page - 1 }}">Back</button>
+		{% endif %}
+		{% if page < numberOfLastPage %}
+			<button class="nav-button" type="button" name="/{{ state }}/1" value="{{ page + 1 }}">Next</button>
+		{% endif %}
+	</div>
+{% endblock %}

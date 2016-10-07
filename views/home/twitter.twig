@@ -1,0 +1,19 @@
+{% if group|length == 1 %}
+    {% set tweet = group[0] %}
+    <div class="box rec-box" id="{{ tweet.id }}">
+        {{ include('home/tweet_content.twig', {tweet: tweet}) }}
+    </div>
+{% else %}
+    <div class="box rec-box">
+        <div class="slick-gallery">
+            {% for tweet in group %}
+                <div class="item" id="{{ tweet.id }}">
+                    {{ include('home/tweet_content.twig', {tweet: tweet}) }}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            <div class="pagingInfo">{{ "1 / #{group|length}" }}</div>
+        </div>
+    </div>
+{% endif %}
