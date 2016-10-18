@@ -78,10 +78,15 @@ class FacebookPhotoImport {
         /*  Description: Get photos from the event.
          */
         
-        // get photos directly from the event page
-        $this->getEventPhotos();
-        // get photos from the albums found on the page of the location 
-        $this->getLocationPhotos();
+        try { 
+            // get photos directly from the event page 
+            $this->getEventPhotos(); 
+            // get photos from the albums found on the page of the location  
+            $this->getLocationPhotos(); 
+        } 
+        catch (\InvalidArgumentException $e) { 
+            return; 
+        }
     }
     
     
@@ -114,6 +119,13 @@ class FacebookPhotoImport {
             catch (ConnectException $e) {
                 $retry = true;
                 continue;   // retry request
+            }
+            catch (ClientException $e) { 
+                if ($e->getResponse()->getStatusCode() === 404) { 
+                    $this->deleteEvent(); 
+                     
+                    throw new \InvalidArgumentException(''); 
+                } 
             }
             
             if ($response->getStatusCode() !== 200) {
@@ -283,5 +295,58 @@ class FacebookPhotoImport {
                 $this->getEventPhotos($album_id);
             }
         }
+    }
+    
+    
+    protected function deleteEvent() { 
+         
+        $id = $this->getEventId(); 
+         
+        $this->deleteEventPhotos($id); 
+        $this->deleteEventFromTimeline($id); 
+        $this->deleteEventFromEventTable(); 
+    } 
+     
+     
+    protected function getEventId() { 
+         
+        $event = \ORM::for_table('fb_event') 
+            ->where('event_id', $this->event_id) 
+            ->find_one(); 
+             
+        return $event->id; 
+    }
+    
+    
+    protected function deleteEventFromEventTable() { 
+         
+        $event = \ORM::for_table('fb_event') 
+            ->where('event_id', $this->event_id) 
+            ->find_one(); 
+             
+        $event->delete(); 
+    } 
+     
+     
+    protected function deleteEventPhotos($id) { 
+         
+        $photos = \ORM::for_table('fb_photo') 
+            ->where('event_id', $id) 
+            ->find_many(); 
+             
+        foreach ($photos as $photo) { 
+            $photo->delete(); 
+        } 
+    }
+    
+    
+    protected function deleteEventFromTimeline($id) { 
+         
+        $event = \ORM::for_table('timeline') 
+            ->where('source', 'fb_event') 
+            ->where('source_id', $id) 
+            ->find_one(); 
+             
+        $event->delete(); 
     }
 }
