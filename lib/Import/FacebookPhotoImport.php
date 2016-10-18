@@ -125,7 +125,10 @@ class FacebookPhotoImport {
                     $this->deleteEvent(); 
                      
                     throw new \InvalidArgumentException(''); 
-                } 
+                }
+                else {
+                    throw $e;
+                }
             }
             
             if ($response->getStatusCode() !== 200) {
