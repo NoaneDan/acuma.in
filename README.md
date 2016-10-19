@@ -1,4 +1,5 @@
 # Acuma.in
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/e-spres-oh/acuma.in/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/e-spres-oh/acuma.in/?branch=master)
 
 ## Setup
 
