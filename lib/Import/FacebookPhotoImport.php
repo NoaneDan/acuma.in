@@ -78,10 +78,15 @@ class FacebookPhotoImport {
         /*  Description: Get photos from the event.
          */
         
-        // get photos directly from the event page
-        $this->getEventPhotos();
-        // get photos from the albums found on the page of the location 
-        $this->getLocationPhotos();
+        try { 
+            // get photos directly from the event page 
+            $this->getEventPhotos(); 
+            // get photos from the albums found on the page of the location  
+            $this->getLocationPhotos(); 
+        } 
+        catch (\InvalidArgumentException $e) { 
+            return; 
+        }
     }
     
     
@@ -114,6 +119,16 @@ class FacebookPhotoImport {
             catch (ConnectException $e) {
                 $retry = true;
                 continue;   // retry request
+            }
+            catch (ClientException $e) { 
+                if ($e->getResponse()->getStatusCode() === 404) { 
+                    $this->deleteEvent(); 
+                     
+                    throw new \InvalidArgumentException(''); 
+                }
+                else {
+                    throw $e;
+                }
             }
             
             if ($response->getStatusCode() !== 200) {
@@ -227,6 +242,7 @@ class FacebookPhotoImport {
             
             $client = new Client(['base_uri' => 'https://graph.facebook.com']);
             $retry = false;
+            $max_percentage = null; 
             do {
                 try {
                     $response = $client->request('GET', "/v2.7/$this->location_id/albums", $params);
@@ -243,16 +259,23 @@ class FacebookPhotoImport {
             
                 $albums = json_decode((string) $response->getBody());
                 foreach ($albums->data as $album) {
-                    // the albums are stored in chronological order except for a few (Profile Pictures, Timline Photos, etc.)
-                    if (strtotime($album->created_time) < strtotime($event->start_time) && !in_array($album->name, ['Profile Pictures', 'Timeline Photos', 'Cover Photos', 'Mobile Uploads'])) {
-                        $old_albums = true;
-                    }
                     
-                    // try to find a match between the album name and the event
-                    similar_text(metaphone($album->name), metaphone($event->name), $percentage);
-                    if ((!isset($max_percentage)) || ($percentage > $max_percentage)) {
-                        $album_id = $album->id;
-                        $max_percentage = $percentage;
+                    // the albums are stored in chronological order except for a few (Profile Pictures, Timline Photos, etc.)
+                    if (in_array($album->name, ['Profile Pictures', 'Timeline Photos', 'Cover Photos', 'Mobile Uploads'])) { 
+                        continue; 
+                    } 
+                    else if (strtotime($album->created_time) < strtotime($event->start_time)) { 
+                        $old_albums = true; 
+                         
+                        break; 
+                    }
+                    else { 
+                        // try to find a match between the album name and the event 
+                        similar_text(metaphone($album->name), metaphone($event->name), $percentage); 
+                        if ((!isset($max_percentage)) || ($percentage > $max_percentage)) { 
+                            $album_id = $album->id; 
+                            $max_percentage = $percentage; 
+                        } 
                     }
                 }
                 
@@ -268,11 +291,13 @@ class FacebookPhotoImport {
                         $params['query']['pretty'] = $pretty;
                     }
                 }
-            } while ($retry || (!isset($old_albums) && isset($albums->paging->next)));
+                
+                $continue = $retry || (!isset($old_albums) && isset($albums->paging->next)); 
+            } while ($continue); 
             
             // if we find a satisfying match we save the album id
             // and extract the photos from it
-            if ($max_percentage > 70) {
+            if (isset($max_percentage) && $max_percentage > 70) { 
                 $event = \ORM::for_table('fb_event')
                     ->where('event_id', $this->event_id)
                     ->find_one();
@@ -283,5 +308,58 @@ class FacebookPhotoImport {
                 $this->getEventPhotos($album_id);
             }
         }
+    }
+    
+    
+    protected function deleteEvent() { 
+         
+        $id = $this->getEventId(); 
+         
+        $this->deleteEventPhotos($id); 
+        $this->deleteEventFromTimeline($id); 
+        $this->deleteEventFromEventTable(); 
+    } 
+     
+     
+    protected function getEventId() { 
+         
+        $event = \ORM::for_table('fb_event') 
+            ->where('event_id', $this->event_id) 
+            ->find_one(); 
+             
+        return $event->id; 
+    }
+    
+    
+    protected function deleteEventFromEventTable() { 
+         
+        $event = \ORM::for_table('fb_event') 
+            ->where('event_id', $this->event_id) 
+            ->find_one(); 
+             
+        $event->delete(); 
+    } 
+     
+     
+    protected function deleteEventPhotos($id) { 
+         
+        $photos = \ORM::for_table('fb_photo') 
+            ->where('event_id', $id) 
+            ->find_many(); 
+             
+        foreach ($photos as $photo) { 
+            $photo->delete(); 
+        } 
+    }
+    
+    
+    protected function deleteEventFromTimeline($id) { 
+         
+        $event = \ORM::for_table('timeline') 
+            ->where('source', 'fb_event') 
+            ->where('source_id', $id) 
+            ->find_one(); 
+             
+        $event->delete(); 
     }
 }
