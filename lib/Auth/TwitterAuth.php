@@ -20,8 +20,6 @@
 namespace AcumaIn\Auth;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\ClientException;
-use GuzzleHttp\Psr7;
 
 class TwitterAuth {
     
